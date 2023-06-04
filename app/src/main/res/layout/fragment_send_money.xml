@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+   <data>
+
+   </data>
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:context=".SendMoneyFragment">
+
+      <ImageView
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:id="@+id/backButton"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          android:layout_margin="20dp"
+          android:backgroundTint="@color/black"
+          android:background="@drawable/ic_back" />
+
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/transactionLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toTopOf="@id/sendMoneyButton">
+
+         <TextView
+             android:id="@+id/recipientNameView"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/receipient_name"
+             android:fontFamily="@font/roboto_medium"
+             android:textColor="@color/raisin_black"
+             android:textSize="20sp"
+             android:layout_margin="20dp"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/receipientNameInputBox"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="20dp"
+             android:layout_marginEnd="20dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/ic_rectangular_border"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/recipientNameView">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/receipientName"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="17sp"
+                android:background="@color/transparent"
+                android:paddingEnd="14dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:maxLength="20"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+         <TextView
+             android:id="@+id/mobileTextView"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/mobile_number"
+             android:fontFamily="@font/roboto_medium"
+             android:textColor="@color/raisin_black"
+             android:textSize="20sp"
+             android:layout_margin="20dp"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/receipientNameInputBox" />
+
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/mobileNumberInputBox"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="20dp"
+             android:layout_marginEnd="20dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/ic_rectangular_border"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/mobileTextView">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/mobileNumber"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="17sp"
+                android:background="@color/transparent"
+                android:paddingEnd="14dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:inputType="phone"
+                android:maxLength="20"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+         <TextView
+             android:id="@+id/amountView"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/amount_text"
+             android:fontFamily="@font/roboto_medium"
+             android:textColor="@color/raisin_black"
+             android:textSize="20sp"
+             android:layout_margin="20dp"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/mobileNumberInputBox" />
+
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/amountInputBox"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="20dp"
+             android:layout_marginEnd="20dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/ic_rectangular_border"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/amountView">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/amount"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="17sp"
+                android:background="@color/transparent"
+                android:paddingEnd="14dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:inputType="numberDecimal"
+                android:maxLength="20"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <Button
+          android:id="@+id/sendMoneyButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="20dp"
+          android:layout_marginTop="40dp"
+          android:layout_marginEnd="20dp"
+          android:padding="12dp"
+          android:text="@string/send"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/transactionLayout" />
+
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

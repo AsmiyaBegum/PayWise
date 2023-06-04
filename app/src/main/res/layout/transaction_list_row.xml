@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_margin="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/transactionIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintCircleRadius="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black"
+                    app:srcCompat="@drawable/ic_money_send" />
+
+                <TextView
+                    android:id="@+id/transactionType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/transactions"
+                    app:layout_constraintStart_toEndOf="@id/transactionIcon"
+                    android:layout_marginStart="10dp"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toTopOf="@id/transactionIcon"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/raisin_black" />
+
+
+                <TextView
+                    android:id="@+id/transactionTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/transactions"
+                    app:layout_constraintStart_toEndOf="@id/transactionIcon"
+                    android:layout_marginStart="10dp"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@id/transactionType"
+                    app:layout_constraintBottom_toBottomOf="@id/transactionIcon"
+                    android:fontFamily="@font/roboto_thin"
+                    android:textColor="@color/text_grey" />
+
+                <TextView
+                    android:id="@+id/transactionAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/raisin_black"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="14sp"
+                    android:text="@string/dollar_amount"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/transactionType"
+                    app:layout_constraintBottom_toBottomOf="@id/transactionTime" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

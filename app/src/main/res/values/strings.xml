@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">PayWise</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="welcome_back">welcome back</string>
+    <string name="search_transaction">Search transaction</string>
+    <string name="send">Send</string>
+    <string name="receive">Receive</string>
+    <string name="top_up">Top-up</string>
+    <string name="more">More</string>
+    <string name="transactions">Transactions</string>
+    <string name="view_all">View All</string>
+    <string name="card_balance">Card Balance</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="transfer_success">Transfer Success!</string>
+    <string name="successful_transaction">Your transaction was successful</string>
+    <string name="amount">%1$s %2$s</string>
+    <string name="recipient">Recipient</string>
+    <string name="sender">Sender</string>
+    <string name="amount_sent">Amount Sent</string>
+    <string name="transaction_details">Transaction Details</string>
+    <string name="transaction_number">Transaction number</string>
+    <string name="transaction_fee">Transaction Fee</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="back_to_home">Back to home</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="send_otp_for_mobile_number_msg">We will send you on One Time Password on this mobile number</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="dont_receive_the_otp">Did you not receive the OTP? </string>
+    <string name="resend_otp">RESEND OTP</string>
+    <string name="home_tour1">Manage all your financial transactions seamlessly </string>
+    <string name="home_tour2">Easily manage credit card transactions, send, and receive money all in one place </string>
+    <string name="resend_otp_time">Resend in %1$s</string>
+    <string name="key_okay">Okay</string>
+    <string name="enter_valid_mob_num">Kindly enter valid indian mobile number.</string>
+    <string name="device_offline">Device Offline.</string>
+    <string name="enter_otp">Kindly enter OTP</string>
+    <string name="otp_expired">OTP is expired, Kindly Regenerate and try</string>
+    <string name="invalid_otp">Invalid OTP. Please try again</string>
+    <string name="maximum_otp_trials_exceeded">Invalid OTP! Maximum tries of OTP is exceeded </string>
+    <string name="receipient_name">Recepient Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="amount_text">Amount</string>
+    <string name="transaction_success_fragment">Transaction Success Fragment</string>
+    <string name="bank_app_home_fragment">Home Fragment</string>
+    <string name="send_money_fragment">Send Money Fragment</string>
+    <string name="payment_confirmation">Payment Confirmation</string>
+    <string name="pay_mobile_number">Pay to this Mobile Number</string>
+    <string name="amount_transaction_content">Will be paid to this number %1$s</string>
+    <string name="cancel">Cancel</string>
+    <string name="expires">Expires</string>
+    <string name="provide_recipient">Kindly provide Recipient Name</string>
+    <string name="provide_valid_mobile_number">Kindly provide valid Mobile Number</string>
+    <string name="provide_valid_amount">Kindly provide valid Amount</string>
+    <string name="dollar_amount">- $10</string>
+</resources>

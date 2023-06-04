@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="transactionDetailData"
+            type="com.ab.bankingapplication.model.TransactionDetails" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/successIcon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/transaction_success"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backButton" />
+
+
+        <TextView
+            android:id="@+id/transferSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer_success"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="20sp"
+            android:textColor="@color/raisin_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/successIcon" />
+
+        <TextView
+            android:id="@+id/successfulTransaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/successful_transaction"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/medium_dark_shade"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transferSuccess" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer_success"
+            android:layout_marginTop="22dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="28sp"
+            android:textColor="@color/raisin_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/successfulTransaction" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/receipientCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/amount">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterButton
+                    android:id="@+id/receipientImage"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/ic_receiver_profile"
+                    android:background="@color/transparent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    app:roundPercent="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recipient"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/recipient"
+                    android:textSize="17sp"
+                    android:textColor="@color/medium_dark_shade"
+                    app:layout_constraintStart_toEndOf="@id/receipientImage"
+                    app:layout_constraintTop_toTopOf="@id/receipientImage"
+                    android:layout_marginStart="8dp" />
+
+                <TextView
+                    android:id="@+id/recipientName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{transactionDetailData.receiverName}"
+                    android:textSize="19sp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/raisin_black"
+                    app:layout_constraintStart_toEndOf="@id/receipientImage"
+                    app:layout_constraintTop_toBottomOf="@id/recipient"
+                    app:layout_constraintBottom_toBottomOf="@id/receipientImage" />
+
+                <TextView
+                    android:id="@+id/senderTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/sender"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto_thin"
+                    android:textColor="@color/medium_dark_shade"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recipientName" />
+
+
+                <TextView
+                    android:id="@+id/senderName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@{transactionDetailData.senderName}"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/raisin_black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recipientName" />
+
+                <TextView
+                    android:id="@+id/amountSentTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/amount_sent"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto_thin"
+                    android:textColor="@color/medium_dark_shade"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/senderName" />
+
+
+                <TextView
+                    android:id="@+id/amountSent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/amount"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/raisin_black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/senderName" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/transactionDetailCard"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toBottomOf="@id/receipientCard">
+
+            <TextView
+                android:id="@+id/transactionDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transaction_details"
+                android:textColor="@color/medium_dark_shade"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/transactionNumberTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transaction_number"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_thin"
+                android:textColor="@color/medium_dark_shade"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@id/transactionDetail"
+                app:layout_constraintBottom_toTopOf="@id/transactionFee"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/transactionNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{transactionDetailData.transactionNumber}"
+                android:textSize="17sp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/raisin_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@id/transactionFee"
+                app:layout_constraintTop_toBottomOf="@id/transactionDetail" />
+
+            <TextView
+                android:id="@+id/transactionFeeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transaction_fee"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_thin"
+                android:textColor="@color/medium_dark_shade"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toBottomOf="@id/transactionNumber"
+                app:layout_constraintBottom_toTopOf="@id/transactionDate"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/transactionFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/transaction_fee"
+                android:textSize="17sp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/raisin_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/transactionDate"
+                app:layout_constraintTop_toBottomOf="@id/transactionNumber" />
+
+
+            <TextView
+                android:id="@+id/transactionDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_thin"
+                android:textColor="@color/medium_dark_shade"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@id/transactionTime"
+                app:layout_constraintTop_toBottomOf="@id/transactionFee"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/transactionDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/date"
+                android:textSize="17sp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/raisin_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/transactionTime"
+                app:layout_constraintTop_toBottomOf="@id/transactionFee" />
+
+
+            <TextView
+                android:id="@+id/transactionTimeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_thin"
+                android:textColor="@color/medium_dark_shade"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionDate"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/transactionTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/time"
+                android:textSize="17sp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/raisin_black"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionDate" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/backToHomeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/back_to_home"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintHorizontal_weight="0.7"
+                android:background="@drawable/button_rounded_rectangle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/shareButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/shareButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_share"
+                android:background="@drawable/ic_rectangular_border"
+                android:backgroundTint="@color/blue"
+                app:layout_constraintHorizontal_weight="0.5"
+                android:layout_marginStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/backToHomeButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
