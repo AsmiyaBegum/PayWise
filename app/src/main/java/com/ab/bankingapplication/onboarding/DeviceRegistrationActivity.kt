@@ -1,13 +1,14 @@
 package com.ab.bankingapplication.onboarding
 
-//import com.twilio.Twilio
-//import com.twilio.rest.verify.v2.service.Verification
+import com.twilio.Twilio
+import com.twilio.rest.verify.v2.service.Verification
 
 import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -20,13 +21,22 @@ import com.ab.bankingapplication.databinding.ActivityDeviceRegistrationBinding
 import com.ab.bankingapplication.util.Constants
 import com.ab.bankingapplication.util.Utils
 import com.ab.bankingapplication.util.Utils.openKeyboard
+import com.ab.bankingapplication.util.Utils.setTextBlackAndBold
 import com.ab.bankingapplication.util.Utils.showVisibility
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.Status
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import com.jakewharton.rxbinding.view.changeEvents
 import com.jakewharton.rxbinding.view.clicks
+import com.jakewharton.rxbinding.widget.textChangeEvents
+import com.twilio.rest.api.v2010.account.incomingphonenumber.Local.creator
+import com.twilio.rest.api.v2010.account.incomingphonenumber.TollFree.creator
+
+import com.twilio.rest.api.v2010.account.Message
+import com.twilio.type.PhoneNumber
+import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 
 
@@ -71,13 +81,20 @@ class DeviceRegistrationActivity :  AppCompatActivity(){
         }
     }
 
-    fun bind(){
+    private fun bind(){
+        
         binding.nextButton.clicks()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 handleNextButtonEvent()
             }
 
+        binding.resendOTP.clicks()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                generateOTPAndSendSMS()
+                validateAndInitiateTimer()
+            }
 
 
         binding.otpButton.clicks()
@@ -98,16 +115,14 @@ class DeviceRegistrationActivity :  AppCompatActivity(){
                 }
             }
 
-//        binding.otpView.otpListener = (object : OTPListener {
-//            override fun onInteractionListener() {
-//                // fired when user types something in the Otpbox
-//            }
-//
-//            override fun onOTPComplete(otp: String) {
-//                // fired when user has entered the OTP fully.
-//               validateOTP()
-//            }
-//        })
+        
+        Observable.merge(binding.mobileNumber.textChangeEvents(),binding.otpView.changeEvents())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { 
+                dismissPreviousSnackBar()
+            }
+        
+
     }
 
     private fun validateOTP(){
@@ -124,9 +139,11 @@ class DeviceRegistrationActivity :  AppCompatActivity(){
                 showMobileLogin(true)
                 validateTimeAndInitiateCount(System.currentTimeMillis() + 30000L)
                 invalidCount = 0
+
             }else{
                 Utils.snackBarListener(binding.otpButton,getString(R.string.invalid_otp),snackBar)
             }
+            binding.otpView.setOTP("")
         }else{
             routeToBankApplicationActivity()
         }
@@ -161,35 +178,36 @@ class DeviceRegistrationActivity :  AppCompatActivity(){
 
 
     private fun generateOTPAndSendSMS(){
-//        if (binding.mobileNumber.text.toString().contains("9003606100")){
-            Utils.setSecureSharedPreferences(Constants.SHARED_PREF_GENERATED_OTP,"1234")
+//        if (binding.mobileNumber.text.toString().contains(Constants.DEMO_MOBILE_NUMBER)){
+            Utils.setSecureSharedPreferences(Constants.SHARED_PREF_GENERATED_OTP,Constants.DEMO_OTP)
+//        } else {
+//            val otp = Utils.generateRandomOTP()
+//            Utils.setSecureSharedPreferences(Constants.SHARED_PREF_GENERATED_OTP,otp)
+//            sendVerificationCode(binding.mobileNumber.text.toString())
 //        }
-//        val otp = Utils.generateRandomOTP()
-//        Utils.setSecureSharedPreferences(Constants.SHARED_PREF_GENERATED_OTP,otp)
-//        sendVerificationCode(binding.mobileNumber.text.toString())
         Utils.setAppState(Constants.APP_STATE_VERIFY_OTP)
-
-        showMobileLogin(false)
         storeMobileNumber()
-
+        showMobileLogin(false)
         // set validTime
         Utils.setSharedPrefStr(Constants.SHARED_PREF_VERIFY_OTP_LAST_REQUEST_TIME, (System.currentTimeMillis() + 30000).toString())
-
     }
 
     private fun storeMobileNumber(){
         Utils.setSecureSharedPreferences(Constants.SHARED_PREF_USER_MOBILE_NUMBER,binding.mobileNumber.text.toString())
     }
 
+    private fun sendMessage(to: String?, message: String?) {
+        val mes = Message.creator(PhoneNumber(to), PhoneNumber(Constants.TWILIO_PHONE_NUMBER), message).create()
+        mes.runCatching {
+            println(this)
+        }
+    }
 
 
 
-    fun sendVerificationCode(phoneNumber: String) {
-//        Twilio.init(ACCOUNT_SID, AUTH_TOKEN)
-
-//        val verification = Verification.creator(VERIFY_SERVICE_SID, phoneNumber, "sms").create()
-//        println(verification.status)
-        // Handle verification creation response
+    private fun sendVerificationCode(phoneNumber: String) {
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN)
+        sendMessage(phoneNumber,"sample")
     }
 
 
@@ -237,7 +255,6 @@ class DeviceRegistrationActivity :  AppCompatActivity(){
 
 
     private fun bindLayout(){
-
         handleFormVisibility()
         validateAndInitiateTimer()
     }
@@ -274,10 +291,10 @@ class DeviceRegistrationActivity :  AppCompatActivity(){
                     binding.resendText?.text = resources.getString(R.string.resend_otp_time, (millisUntilFinished/1000).toString())
                     resendOtpDefault()
                 }else{
+                    binding.otpButton.isEnabled = true
                     binding.resendOTP.isEnabled = false
                     binding.resendOTP?.text = resources.getString(R.string.resend_otp_time,(millisUntilFinished / 1000).toString())
                 }
-                binding.otpButton.isEnabled = false
             }
 
             override fun onFinish() {
@@ -337,11 +354,18 @@ class DeviceRegistrationActivity :  AppCompatActivity(){
             } else {
                 binding.otpView.openKeyboard(true,applicationContext)
             }
+            val msg = resources.getString(R.string.otp_sent_message,Utils.getUserMobileNumber())
+            binding.sendOtpMsg.text = setTextBlackAndBold(msg,22,msg.length)
+            binding.otpButton.text = resources.getString(R.string.verify_and_proceed)
+        }else{
+            binding.mobileNumber.setText(Utils.getUserMobileNumber())
+            binding.sendOtpMsg.text = setTextBlackAndBold( resources.getString(R.string.send_otp_for_mobile_number_msg),20,37)
+            binding.otpButton.text = resources.getString(R.string.verify_otp)
         }
         //handle timer
 
-
     }
+
 
     private fun showHomeTour(show : Boolean){
         binding.loginHomeTour.showVisibility(show)
@@ -426,6 +450,16 @@ class DeviceRegistrationActivity :  AppCompatActivity(){
         }
     }
 
+
+    override fun onBackPressed() {
+        if (binding.otpPage.isVisible) {
+            Utils.setSharedPrefStr(Constants.SHARED_PREF_APP_STATE, Constants.APP_STATE_LOGIN_PAGE)
+            showMobileLogin(true)
+            validateAndInitiateTimer()
+        } else {
+            super.onBackPressed()
+        }
+    }
 
 
 }

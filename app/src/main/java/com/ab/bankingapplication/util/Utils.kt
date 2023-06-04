@@ -1,21 +1,38 @@
 package com.ab.bankingapplication.util
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.app.Activity
 import android.app.ActivityManager
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.Typeface
+import android.location.LocationManager
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Build
+import android.text.Spannable
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
 import android.util.Log
 import android.util.Patterns
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.ab.bankingapplication.BankingApplication
 import com.ab.bankingapplication.BuildConfig
+import android.provider.Settings
+import android.text.style.ForegroundColorSpan
 import com.ab.bankingapplication.R
+import com.ab.bankingapplication.util.Constants.LOCATION_PERMISSION_REQUEST_CODE
 import com.google.android.material.snackbar.Snackbar
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -89,8 +106,8 @@ object Utils {
         return otpBuilder.toString()
     }
 
-    fun  Double.getAmountWithCurrency(): String{
-        return this.toString()
+    fun  Double.getAmountWithCurrency(): String {
+        return BankingApplication.currencySymbol.plus(this.toString())
     }
 
     private fun allowLogging(): Boolean {
@@ -125,6 +142,15 @@ object Utils {
         }
     }
 
+    fun setTextBlackAndBold(originalText: String, startIndex: Int, endIndex: Int): SpannableStringBuilder {
+        val spannableStringBuilder = SpannableStringBuilder(originalText)
+        val foregroundColorSpan = ForegroundColorSpan(Color.BLACK)
+        spannableStringBuilder.setSpan(foregroundColorSpan, startIndex, endIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        val styleSpan = StyleSpan(Typeface.BOLD)
+        spannableStringBuilder.setSpan(styleSpan, startIndex, endIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        return spannableStringBuilder
+    }
+
     fun isAppInForeground(context: Context?): Boolean {
         val am = context?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val tasks = am.getRunningTasks(1)
@@ -135,6 +161,66 @@ object Utils {
             }
         }
         return true
+    }
+
+    fun isLocationPermissionAndLocationEnabled(context: Context,activity: Activity) : Boolean {
+        var bothPermissionAndLocationAvailable = false
+        when{
+            !isLocationPermissionGranted(context) && !shouldShowLocationPermissionRationale(activity) -> showLocationPermissionDeniedDialog(activity,context)
+            !isLocationPermissionGranted(context) -> requestLocationPermission(activity)
+            !isLocationEnabled(context) -> showLocationEnableDialog(activity)
+            else -> bothPermissionAndLocationAvailable = true
+        }
+        return bothPermissionAndLocationAvailable
+    }
+
+
+    private fun isLocationPermissionGranted(context: Context): Boolean {
+        val permission = ACCESS_FINE_LOCATION
+        val granted = PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(context, permission) == granted
+    }
+
+    private fun isLocationEnabled(context: Context): Boolean {
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    private fun requestLocationPermission(activity: Activity) {
+        val permission = ACCESS_FINE_LOCATION
+        ActivityCompat.requestPermissions(activity, arrayOf(permission), LOCATION_PERMISSION_REQUEST_CODE)
+    }
+
+    private fun shouldShowLocationPermissionRationale(activity: Activity): Boolean {
+        val permission = ACCESS_FINE_LOCATION
+        return ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
+    }
+
+    private fun showLocationPermissionDeniedDialog(activity: Activity,context: Context) {
+        showAlertDialog(activity,"Permission Required","To provide accurate location information, the app needs access to your location.","Grant Permission"){
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            val uri = Uri.fromParts("package", context.packageName, null)
+            intent.data = uri
+            context.startActivity(intent)
+        }
+    }
+
+    private fun showLocationEnableDialog(activity: Activity) {
+        showAlertDialog(activity,"Location Services Disabled","Please enable location services to use this feature.","Enable") {
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            activity.startActivity(intent)
+        }
+    }
+
+    private fun showAlertDialog(activity: Activity, title: String,message : String,positiveButton : String,positiveButtonAction : (Unit) -> Unit = { }){
+        AlertDialog.Builder(activity)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(positiveButton) { _, _ ->
+                positiveButtonAction(Unit)
+            }
+            .show()
     }
 
 

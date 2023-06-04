@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"
+        android:checked="true"
+        android:iconTint="@color/white"
+        android:color="@color/black"/>
+
+    <item
+        android:id="@+id/wallet"
+        android:icon="@drawable/ic_wallet"
+        android:title="@string/wallet"
+        android:iconTint="@color/white"
+        android:color="@color/black"/>
+
+    <item
+        android:id="@+id/graph"
+        android:icon="@drawable/ic_graph"
+        android:title="@string/graph"
+        android:iconTint="@color/white"
+        android:color="@color/black"/>
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile"
+        android:iconTint="@color/white"
+        android:color="@color/black"/>
+
+
+</menu>

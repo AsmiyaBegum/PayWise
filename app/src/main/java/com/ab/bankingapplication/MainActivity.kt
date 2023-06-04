@@ -9,7 +9,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatDelegate
 import com.ab.bankingapplication.databinding.ActivityMainBinding
+import com.ab.bankingapplication.util.Utils.showVisibility
+import io.ak1.OnBubbleClickListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,19 +22,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Set the default night mode to light mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        setSupportActionBar(binding.toolbar)
+
+        binding.bubbleTabBar.addBubbleListener { id ->
+
+        }
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
-//        setupActionBarWithNavController(navController, appBarConfiguration)
 
-//        binding.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
+    }
+
+
+    fun showOrHideNavigationView(show : Boolean){
+        binding.bubbleTabBar.showVisibility(show)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

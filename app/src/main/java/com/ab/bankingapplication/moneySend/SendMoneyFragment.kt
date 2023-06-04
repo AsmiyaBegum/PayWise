@@ -1,4 +1,4 @@
-package com.ab.bankingapplication
+package com.ab.bankingapplication.moneySend
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.ab.bankingapplication.MainActivity
+import com.ab.bankingapplication.R
 import com.ab.bankingapplication.bottomsheet.MoneySendConfirmationDialog
 import com.ab.bankingapplication.databinding.FragmentSendMoneyBinding
 import com.ab.bankingapplication.model.TransactionDetails
@@ -19,7 +21,7 @@ import rx.android.schedulers.AndroidSchedulers
 import java.util.Date
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * A Send Money screen to send money via phone number.
  */
 class SendMoneyFragment : Fragment(),MoneySendConfirmationDialog.Delegate {
 
@@ -46,10 +48,16 @@ class SendMoneyFragment : Fragment(),MoneySendConfirmationDialog.Delegate {
                 validateBeforeSendMoney()
             }
 
-        Observable.merge(binding.receipientName.textChangeEvents(),binding.amount.textChangeEvents(),binding.mobileNumber.textChangeEvents())
+        Observable.merge(binding.recipientName.textChangeEvents(),binding.amount.textChangeEvents(),binding.mobileNumber.textChangeEvents())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 dismissPreviousSnackBar()
+            }
+
+        binding.backButton.clicks()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                findNavController().navigate(R.id.action_SendMoneyFragment_to_BankHomeFragment)
             }
     }
 
@@ -57,9 +65,13 @@ class SendMoneyFragment : Fragment(),MoneySendConfirmationDialog.Delegate {
     private fun validateBeforeSendMoney(){
         val result = when{
             !Utils.checkInternetConnection() -> getString(R.string.device_offline)
-            binding.receipientName.text.isNullOrBlank() -> getString(R.string.provide_recipient)
-            binding.mobileNumber.text.isNullOrBlank() || !Utils.isIndianMobileNumber(binding.mobileNumber.text.toString())-> getString(R.string.provide_valid_mobile_number)
-            binding.amount.text.isNullOrBlank() || binding.amount.text.toString().toDouble() <= 0 -> getString(R.string.provide_valid_amount)
+            binding.recipientName.text.isNullOrBlank() -> getString(R.string.provide_recipient)
+            binding.mobileNumber.text.isNullOrBlank() || !Utils.isIndianMobileNumber(binding.mobileNumber.text.toString())-> getString(
+                R.string.provide_valid_mobile_number
+            )
+            binding.amount.text.isNullOrBlank() || binding.amount.text.toString().toDouble() <= 0 -> getString(
+                R.string.provide_valid_amount
+            )
             else -> Constants.VALIDATION_SUCCESS
         }
         if(result == Constants.VALIDATION_SUCCESS){
@@ -71,7 +83,7 @@ class SendMoneyFragment : Fragment(),MoneySendConfirmationDialog.Delegate {
 
 
     private fun confirmMoneySend(){
-        transactionDetails = TransactionDetails(Constants.USER_NAME,binding.receipientName.text.toString(),Utils.getUserMobileNumber(),binding.mobileNumber.text.toString(),binding.amount.text.toString().toDouble())
+        transactionDetails = TransactionDetails(Constants.USER_NAME,binding.recipientName.text.toString(),Utils.getUserMobileNumber(),binding.mobileNumber.text.toString(),binding.amount.text.toString().toDouble())
         val dialog = MoneySendConfirmationDialog.newInstance(transactionDetails,this)
         dialog.show(requireFragmentManager(), Constants.MONEY_SEND_CONFIRMATION_DIALOG_TAG)
     }
@@ -88,6 +100,7 @@ class SendMoneyFragment : Fragment(),MoneySendConfirmationDialog.Delegate {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind()
+        (activity as MainActivity).showOrHideNavigationView(false)
     }
 
     override fun confirmPayment() {
@@ -102,11 +115,7 @@ class SendMoneyFragment : Fragment(),MoneySendConfirmationDialog.Delegate {
         val bundle = Bundle()
         bundle.putParcelable(Constants.TRANSACTION_DETAIL_KEY,transactionDetails)
 
-        findNavController().navigate(R.id.action_SecondFragment_to_TransactionSuccessFragment,bundle)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
+        findNavController().navigate(R.id.action_SendMoneyFragment_to_TransactionSuccessFragment,bundle)
     }
 
 }

@@ -33,8 +33,11 @@ object Constants{
     const val DATE_FORMAT_MMDD = "MM/dd"
     const val DATE_FORMAT_DDMMYYY = "dd MMM yyyy"
     const val TIME_FORMAT_HHMMSSA = "hh:mm:ss a"
-
-
+    const val DEFAULT_SEARCH_TEXT_SIZE = 15F
+    const val LOCATION_PERMISSION_REQUEST_CODE = 851
+    const val DEMO_MOBILE_NUMBER = "9876543210"
+    const val DEMO_OTP = "2404"
+    const val TWILIO_PHONE_NUMBER = "13612669435"
 
 
 

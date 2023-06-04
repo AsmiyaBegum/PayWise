@@ -1,29 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Main content container -->
-    <FrameLayout
-        android:id="@+id/content_container"
+    <!-- Main content -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Main content of your app goes here -->
+        <include layout="@layout/content_main"
+            android:id="@+id/main"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bubbleTabBar"/>
+        <io.ak1.BubbleTabBar
+            android:id="@+id/bubbleTabBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="16dp"
+            android:padding="7dp"
+            app:bubbletab_menuResource="@menu/bottom_navigation_menu"
+            app:bubbletab_custom_font="@font/roboto_medium"
+            app:bubbletab_disabled_icon_color="@color/grey_color"
+            app:bubbletab_horizontal_padding="20dp"
+            app:bubbletab_icon_size="20dp"
+            app:bubbletab_title_size="14sp"
+            app:bubbletab_icon_padding="5sp"
+            app:bubbletab_vertical_padding="10dp"
+            app:bubbletab_tab_corner_radius="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </io.ak1.BubbleTabBar>
 
-    </FrameLayout>
 
-    <!-- NavigationView at the bottom -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#F0F0F0"
-        android:layout_gravity="bottom">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Contents of your NavigationView -->
 
-    </LinearLayout>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

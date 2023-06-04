@@ -1,9 +1,10 @@
-package com.ab.bankingapplication
+package com.ab.bankingapplication.bankHome
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ab.bankingapplication.service.TransactionService
 import com.ab.bankingapplication.model.CurrenciesModel
 import kotlinx.coroutines.*
 

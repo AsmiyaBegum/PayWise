@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.ab.bankingapplication.BankingApplication
 import com.ab.bankingapplication.R
 import com.ab.bankingapplication.databinding.MoneySendConfirmationDialogBinding
 import com.ab.bankingapplication.model.TransactionDetails
@@ -63,6 +64,7 @@ class MoneySendConfirmationDialog :  BottomSheetDialogFragment() {
 
     private fun bindDataToLayout(){
         binding.transactionDetails = transactionDetails
+        binding.amount.text = BankingApplication.currencySymbol.plus(transactionDetails.amount)
     }
 
     companion object {

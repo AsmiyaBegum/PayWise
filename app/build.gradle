@@ -38,6 +38,10 @@ android {
         viewBinding true
         dataBinding true
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -52,6 +56,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -67,9 +72,6 @@ dependencies {
     implementation 'com.trello:rxlifecycle-components:1.0'
     implementation 'com.trello:rxlifecycle-kotlin:1.0'
 
-    // for circle image view
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.mikhaellopez:circularimageview:4.3.1'
 
     // for otp view
     implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx'
@@ -81,11 +83,8 @@ dependencies {
     implementation "androidx.security:security-crypto:1.0.0-alpha02"
 
     // to send an SMS
-//    implementation "com.twilio.sdk:twilio:8.20.0"
-
-    //for gifImageView
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
-
+    implementation "com.twilio.sdk:twilio:8.20.0"
+    
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -99,6 +98,9 @@ dependencies {
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+
+    //Navigation view
+    implementation  'io.ak1:bubbletabbar:1.0.8'
 
 
 }

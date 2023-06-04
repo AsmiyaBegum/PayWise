@@ -1,5 +1,7 @@
 package com.ab.bankingapplication.util
 
+import android.icu.util.Currency
+import com.ab.bankingapplication.BankingApplication
 import com.ab.bankingapplication.R
 import com.ab.bankingapplication.databinding.CardListRowBinding
 import com.ab.bankingapplication.databinding.TransactionListRowBinding
@@ -19,16 +21,17 @@ object AdapterUtils {
             override fun bindingViewHolder(binding: CardListRowBinding, data: CardDetails,
                                            holder: GenericAdapter.GenericViewHolder<CardDetails, CardListRowBinding, List<CardDetails>>, additionalData: List<CardDetails>?) {
 
+                    val currency = BankingApplication.currencySymbol
                     binding.cardDetails = data
                     binding.creditCardNumber.maskCardNumber(data.creditCardNumber,true,data.creditCardNumber.length-4)
                     binding.expiredDate.formatDate(data.creditCardExpiredDate,Constants.DATE_FORMAT_MMDD)
-//                    binding.cardBalanceAmount.formatAmount(data.cardBalance)
-                    binding.cardBalanceAmount.maskCardNumber(data.cardBalance.toString(),true)
+                    binding.cardBalanceAmount.maskCardNumber(currency.plus(data.cardBalance.toString()),true)
+                    binding.cardView.setBackgroundColor(data.bgColor)
                     binding.maskBalance.clicks()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
                             val maskedBalance = binding.cardBalanceAmount.text.toString().contains("*")
-                            binding.cardBalanceAmount.maskCardNumber(data.cardBalance.toString(),!maskedBalance)
+                            binding.cardBalanceAmount.maskCardNumber(currency.plus(data.cardBalance.toString()),!maskedBalance)
                             changeMaskBalanceIcon(!maskedBalance,binding)
                         }
             }

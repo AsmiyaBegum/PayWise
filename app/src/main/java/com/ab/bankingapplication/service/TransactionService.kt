@@ -1,4 +1,4 @@
-package com.ab.bankingapplication
+package com.ab.bankingapplication.service
 
 import com.ab.bankingapplication.api.RetrofitWrapper
 import com.ab.bankingapplication.model.CurrenciesModel
