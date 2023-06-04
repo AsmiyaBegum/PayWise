@@ -249,7 +249,7 @@ object Utils {
     }
 
     fun TextView.formatDate(date : Date,dateFormat : String){
-        val dateFormatter = SimpleDateFormat("MM/dd", Locale.US)
+        val dateFormatter = SimpleDateFormat(dateFormat, Locale.US)
         val formattedDate: String = dateFormatter.format(date)
         this.text = formattedDate
     }
