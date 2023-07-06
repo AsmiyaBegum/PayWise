@@ -41,23 +41,23 @@ page, a transaction page, and a transaction success page.
 
   The login screen of this banking application offers the following functionality:
   
-    ● Mobile Number Input: Users can enter their mobile number for authentication.
+   ● Mobile Number Input: Users can enter their mobile number for authentication.
     
-    ● Mobile Number Validation: The application verifies that the provided mobile number
+   ● Mobile Number Validation: The application verifies that the provided mobile number
     is a correct Indian number.
     
-    ● OTP Generation and SMS: A random PIN is generated for 4 digits and sent to the
+   ● OTP Generation and SMS: A random PIN is generated for 4 digits and sent to the
     user's mobile number using an SMS gateway service.
     
-    ● OTP Confirmation Toast: A toast message is displayed to confirm the successful
+   ● OTP Confirmation Toast: A toast message is displayed to confirm the successful
     sending of the OTP.
     
-    ● OTP Verification: Users enter the received OTP PIN for validation.
+   ● OTP Verification: Users enter the received OTP PIN for validation.
     
-    ● Resending OTP: Users can request a new OTP after a few minutes, which remains
+   ● Resending OTP: Users can request a new OTP after a few minutes, which remains
     valid for a short duration.
     
-    ● Successful Validation: Upon successful OTP validation, users are granted access to
+   ● Successful Validation: Upon successful OTP validation, users are granted access to
     the home screen, allowing them to explore the banking services and information
     provided by the application.
     
