@@ -9,18 +9,30 @@ page, a transaction page, and a transaction success page.
 
 **Goals :**
 
-    ● **User Authentication**:
+ ● **User Authentication**:
+ 
       - Validate the mobile number and a 4-digit PIN during the login process.
-    ● **Home Screen**:
+      
+● **Home Screen**:
+
       - Display user details, including personal information.
+      
       - Display bank account details, such as the account balance and transaction history.
-    ● **Currency Information**:
+      
+● **Currency Information**:
+
       - Provide a list of available currencies on the home screen.
-    ● **Transaction Screen**:
+      
+● **Transaction Screen**:
+
       - Allow users to transfer money to other accounts.
+      
       - Phone number and correct currency amount validation should be done
-    ●** Transaction Success Message**:
+      
+●** Transaction Success Message**:
+
       - Display a success message or confirmation upon completing a transaction.
+      
 **Proposed Flow :**
 
     The application will consist of 4 screen login , home , send money and transfer success screen.
