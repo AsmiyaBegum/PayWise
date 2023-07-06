@@ -23,8 +23,7 @@ page, a transaction page, and a transaction success page.
       - Display a success message or confirmation upon completing a transaction.
 **Proposed Flow :**
 
-    The application will consist of 4 screen login , home , send money and transfer success
-  screen.
+    The application will consist of 4 screen login , home , send money and transfer success screen.
   
 **Login Screen :**
 
@@ -70,8 +69,7 @@ page, a transaction page, and a transaction success page.
 
       ● Transferred Amount: Displays the amount that has been successfully transacted.
       ● Recipient Details: Shows the details of the recipient who received the transfer.
-      ● Date and Time: Indicates the exact date and time when the transaction was
-completed.
+      ● Date and Time: Indicates the exact date and time when the transaction was completed.
       ● Back to Home: Provides an option for the user to navigate back to the home page.
 
 
