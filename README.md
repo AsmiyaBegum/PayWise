@@ -11,7 +11,7 @@ page, a transaction page, and a transaction success page.
 
  ● **User Authentication**:
  
-      - Validate the mobile number and a 4-digit PIN during the login process.
+ - Validate the mobile number and a 4-digit PIN during the login process.
       
 ● **Home Screen**:
 
