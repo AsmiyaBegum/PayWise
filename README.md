@@ -7,6 +7,26 @@ This banking application enables users to log in using their mobile numbers and
 validates their identity through a 4-digit PIN. It includes essential features such as a home
 page, a transaction page, and a transaction success page.
 
+**Application Screenshots**
+
+![Login-Screen](https://github.com/AsmiyaBegum/PayWise/blob/main/applicationGIF/login_screen.gif) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Home-Screen](https://github.com/AsmiyaBegum/PayWise/blob/main/applicationGIF/home_screen.gif) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Payment-Screen](https://github.com/AsmiyaBegum/PayWise/blob/main/applicationGIF/payment_screen.gif) 
+
+**Tech Stack ✨**
+
+  - Kotlin
+  - Coroutines
+  - Navigation Component
+  - Constraint Layout
+  - Twilio
+  - Location API
+  - Restful API
+  - Retrofit
+  - Data Binding
+  - View Binding
+  - MVVM
+  - Encryption data using Encrypted Shared Preferences
+  - ViewModel And LiveData
+
 **Goals :**
 
  ● **User Authentication**:
@@ -99,20 +119,3 @@ page, a transaction page, and a transaction success page.
    ● Date and Time: Indicates the exact date and time when the transaction was completed.
     
    ● Back to Home: Provides an option for the user to navigate back to the home page.
-
-
-**Tech Stack**
-
-  - Kotlin
-  - Coroutines
-  - Navigation Component
-  - Constraint Layout
-  - Twilio
-  - Location API
-  - Restful API
-  - Retrofit
-  - Data Binding
-  - View Binding
-  - MVVM
-  - Encryption data using Encrypted Shared Preferences
-  - ViewModel And LiveData
